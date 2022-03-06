@@ -1,0 +1,26 @@
+task:
+  name: "Setting Up, Syncing, Building and Uploading..."
+  timeout_in: 240m  
+  container:
+      image: marvelmathesh/docker:rom
+      cpu: 8
+      memory: 32G
+        
+  Sync_script:
+      - mkdir -p ~/work
+      - cd ~/work
+      - repo init --depth=1 --no-repo-verify -u git://github.com/LineageOS/android.git -b lineage-18.1 -g default,-mips,-darwin,-notdefault
+      - git clone https://github.com/samsung-m11q/local_manifest -b main .repo/local_manifests
+      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+
+  Build_script:
+      - cd ~/work
+      - . build/envsetup.sh
+      - lunch lineage_m11q-userdebug
+      - mka bacon
+     
+  Upload_script:
+      - cd ~/work
+      - cd out/target/product/"$DEVICE"
+      - curl -sL https://git.io/file-transfer | sh
+      - ./transfer wet *.zip
