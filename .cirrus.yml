@@ -9,14 +9,17 @@ task:
   Sync_script:
       - mkdir -p ~/work
       - cd ~/work
-      - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-18.1 -g default,-mips,-darwin,-notdefault
-      - git clone https://github.com/samsung-m11q/local_manifest -b main .repo/local_manifests
+      - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-20.0 -g default,-mips,-darwin,-notdefault
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+      - git clone https://github.com/atharvnegi/android_kernel_xiaomi_selene kernel/xiaomi/selene
+      - git clone https://github.com/Atharv-Supremacy/android_device_xiaomi_selene device/xiaomi/selene
+      - git clone https://github.com/Atharv-Supremacy/android_vendor_xiaomi_selene vendor/xiaomi/selene
 
   Build_script:
       - cd ~/work
+      - sudo apt install clang-14 -y
       - . build/envsetup.sh
-      - lunch lineage_m11q-userdebug
+      - lunch lineage_selene-userdebug
       - mka bacon
      
   Upload_script:
