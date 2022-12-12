@@ -9,21 +9,20 @@ task:
   Sync_script:
       - mkdir -p ~/work
       - cd ~/work
-      - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-20.0 -g default,-mips,-darwin,-notdefault
+      - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-18. 1-g default,-mips,-darwin,-notdefault
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      - git clone https://github.com/atharvnegi/android_kernel_xiaomi_selene kernel/xiaomi/selene
-      - git clone https://github.com/Atharv-Supremacy/android_device_xiaomi_selene device/xiaomi/selene
-      - git clone https://github.com/Atharv-Supremacy/android_vendor_xiaomi_selene vendor/xiaomi/selene
+      - git clone https://github.com/samsung-m11q/android_kernel_samsung_m11q kernel/samsung/m11q
+      - git clone https://github.com/Atharv-Supremacy/android_vendor_samsung_m11q vendor/samsung/m11q
+      - git clone https://github.com/Atharv-Supremacy/android_device_samsung_m11q device/samsung/m11q
 
   Build_script:
       - cd ~/work
-      - sudo apt install clang-14 -y
       - . build/envsetup.sh
-      - lunch lineage_selene-userdebug
+      - lunch lineage_m11q-userdebug
       - mka bacon
      
   Upload_script:
       - cd ~/work
-      - cd out/target/product/"$DEVICE"
+      - cd out/target/product/m11q
       - curl -sL https://git.io/file-transfer | sh
       - ./transfer wet *.zip
