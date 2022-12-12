@@ -9,7 +9,7 @@ task:
   Sync_script:
       - mkdir -p ~/work
       - cd ~/work
-      - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-18. 1 -g default,-mips,-darwin,-notdefault
+      - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-18.1 -g default,-mips,-darwin,-notdefault
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
       - git clone https://github.com/samsung-m11q/android_kernel_samsung_m11q kernel/samsung/m11q
       - git clone https://github.com/Atharv-Supremacy/android_vendor_samsung_m11q vendor/samsung/m11q
