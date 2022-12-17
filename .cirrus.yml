@@ -10,12 +10,8 @@ task:
       - mkdir -p ~/work
       - cd ~/work
       - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-18.1 -g default,-mips,-darwin,-notdefault
+      - git clone https://github.com/atharvnegi/local_manifest --depth 1 -b main .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      - git clone https://github.com/samsung-m11q/android_kernel_samsung_m11q kernel/samsung/m11q
-      - git clone https://github.com/Atharv-Supremacy/android_vendor_samsung_m11q vendor/samsung/m11q
-      - git clone https://github.com/Atharv-Supremacy/android_device_samsung_m11q device/samsung/m11q
-      - git clone https://github.com/LineageOS/android_device_samsung_slsi_sepolicy -b lineage-18.1 device/samsung_slsi/sepolicy
-      - git clone https://github.com/LineageOS/android_hardware_samsung -b lineage-18.1 hardware/samsung
 
   Build_script:
       - cd ~/work
