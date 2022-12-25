@@ -10,17 +10,19 @@ task:
       - mkdir -p ~/work
       - cd ~/work
       - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-18.1 -g default,-mips,-darwin,-notdefault
-      - git clone https://github.com/atharvnegi/local_manifest --depth 1 -b main .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+      - git clone https://github.com/Atharv-Supremacy/device_nokia_PLE device/nokia/PLE
+      - git clone https://github.com/Atharv-Supremacy/vendor_nokia_PLE vendor/nokia/PLE
+      - git clone https://github.com/Atharv-Supremacy/android_kernel_nokia_msm8937 kernel/nokia/msm8937
 
   Build_script:
       - cd ~/work
       - . build/envsetup.sh
-      - lunch lineage_m11q-userdebug
+      - lunch lineage_PLE-userdebug
       - mka bacon
      
   Upload_script:
       - cd ~/work
-      - cd out/target/product/m11q
+      - cd out/target/product/PLE
       - curl -sL https://git.io/file-transfer | sh
       - ./transfer wet *.zip
