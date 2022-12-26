@@ -14,6 +14,7 @@ task:
       - git clone https://github.com/Atharv-Supremacy/device_nokia_PLE device/nokia/PLE
       - git clone https://github.com/Atharv-Supremacy/vendor_nokia_PLE vendor/nokia/PLE
       - git clone https://github.com/Atharv-Supremacy/android_kernel_nokia_msm8937 kernel/nokia/msm8937
+      - sudo apt-get install depmod -y
 
   Build_script:
       - cd ~/work
