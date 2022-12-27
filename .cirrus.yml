@@ -9,12 +9,15 @@ task:
   Sync_script:
       - mkdir -p ~/work
       - cd ~/work
+      - sudo apt update -y
+      - sudo apt-get install kmod
       - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-18.1 -g default,-mips,-darwin,-notdefault
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
       - git clone https://github.com/Atharv-Supremacy/device_nokia_PLE device/nokia/PLE
       - git clone https://github.com/Atharv-Supremacy/vendor_nokia_PLE vendor/nokia/PLE
       - git clone https://github.com/Atharv-Supremacy/android_kernel_nokia_msm8937 kernel/nokia/msm8937
-      - sudo apt-get install depmod -y
+      - rm -rf hardware/qcom-caf/msm8996/media
+      - git clone https://github.com/Atharv-Supremacy/android_hardware_qcom-caf_msm8996_media hardware/qcom-caf/msm8996/media
 
   Build_script:
       - cd ~/work
