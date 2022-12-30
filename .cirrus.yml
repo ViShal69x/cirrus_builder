@@ -11,22 +11,20 @@ task:
       - cd ~/work
       - sudo apt update -y
       - sudo apt-get install kmod
-      - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-18.1 -g default,-mips,-darwin,-notdefault
+      - repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-      - git clone https://github.com/Atharv-Supremacy/device_nokia_PLE device/nokia/PLE
-      - git clone https://github.com/Atharv-Supremacy/vendor_nokia_PLE vendor/nokia/PLE
-      - git clone https://github.com/Atharv-Supremacy/android_kernel_nokia_msm8937 kernel/nokia/msm8937
-      - rm -rf hardware/qcom-caf/msm8996/media
-      - git clone https://github.com/Atharv-Supremacy/android_hardware_qcom-caf_msm8996_media hardware/qcom-caf/msm8996/media
+      - git clone https://github.com/Atharv-Supremacy/android_device_xiaomi_selene device/xiaomi/selene
+      - git clone https://github.com/Atharv-Supremacy/android_vendor_xiaomi_selene vendor/xiaomi/selene
+      - git clone https://github.com/Yukina-Supremacy/android_kernel_xiaomi_selene kernel/xiaomi/selene
 
   Build_script:
       - cd ~/work
       - . build/envsetup.sh
-      - lunch lineage_PLE-userdebug
+      - lunch lineage_selene-userdebug
       - mka bacon
      
   Upload_script:
       - cd ~/work
-      - cd out/target/product/PLE
+      - cd out/target/product/selene
       - curl -sL https://git.io/file-transfer | sh
       - ./transfer wet *.zip
